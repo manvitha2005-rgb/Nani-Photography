@@ -112,3 +112,25 @@ footer small{width:100%;color:#D9C7A6}
 .steps b{font-weight:500}
 @media(max-width:860px){.three{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .mark{width:44px;height:44px;flex:none}
+.brand .word{display:flex;flex-direction:column;line-height:1}
+.brand .big{font-family:var(--sans),system-ui,sans-serif;font-weight:300;font-size:2rem;letter-spacing:.02em;background:linear-gradient(180deg,#E8C877,#A07A38);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand .small{font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+@media(max-width:760px){.brand .big{font-size:1.6rem}.brand .small{font-size:.55rem;letter-spacing:.24em}}
+.brandlogo {
+  display: block;
+  line-height: 0;
+}
+
+.brandlogo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .brandlogo img {
+    height: 50px;
+  }
+}

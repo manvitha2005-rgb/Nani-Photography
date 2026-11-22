@@ -41,11 +41,11 @@ function Header() {
     </div></header>
   );
 }
-
 function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="ph" style={{ background: "linear-gradient(rgba(25,15,8,.35), rgba(25,15,8,.55)), url('/hero.jpg') center/cover no-repeat" }} />
+      <img src="/images/hero.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(25,15,8,.35), rgba(25,15,8,.55))" }} />
       <div className="wrap">
         <h1>Every Moment Deserves to Be Remembered.</h1>
         <p>Unhurried, honest photography for newborns, families, weddings and celebrations in Hyderabad.</p>
@@ -65,7 +65,8 @@ function Stories({ pick }) {
 function About() {
   return (<>
     <section id="about"><div className="wrap about">
-      <div className="ph">Add: images/family/photographer-portrait.jpg</div>
+      <div className="ph">Add: images/family/photographer-portrait.jpg</div><img src="/images/hero.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+<div style={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(25,15,8,.35), rgba(25,15,8,.55))" }} />
       <div className="t"><h2>Hello, I'm Nani.</h2>
         <p className="lead">I'm a freelance photographer based in Hyderabad. I photograph people as they are, so the pictures feel like your memory of the day.</p>
         <p>{/* TODO: replace with your real story and experience */}I take time to understand your family and your occasion, then stay quietly in the background while it unfolds. Available in Hyderabad, and for travel by arrangement.</p></div>

@@ -45,7 +45,7 @@ function Header() {
 function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="ph" style={{ background: "linear-gradient(rgba(25,15,8,.35), rgba(25,15,8,.55)), url('/images/hero.jpg') center/cover no-repeat" }} />
+      <div className="ph" style={{ background: "linear-gradient(rgba(25,15,8,.35), rgba(25,15,8,.55)), url('/hero.jpg') center/cover no-repeat" }} />
       <div className="wrap">
         <h1>Every Moment Deserves to Be Remembered.</h1>
         <p>Unhurried, honest photography for newborns, families, weddings and celebrations in Hyderabad.</p>

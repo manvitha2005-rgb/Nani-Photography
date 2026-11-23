@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
-import { S, IMG, T, wa, enq, GEN, INSTAGRAM, PACKAGES } from "../lib/data";
+import { Menu, X, MessageCircle, ChevronLeft, ChevronRight, Instagram as InstaIcon, Phone } from "lucide-react";import { S, IMG, T, wa, enq, GEN, INSTAGRAM, PACKAGES } from "../lib/data";
 
 const bg = (id) => `linear-gradient(145deg,${T[id][0]},${T[id][1]})`;
 const real = (s, i) => !!IMG[s[0]][i];
@@ -25,14 +24,19 @@ function Box({ s, i, ar = "4/5", nat = false, style }) {
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const links = [["About", "about"], ["Portfolio", "portfolio"], ["Services", "services"], ["Packages", "packages"], ["Contact", "contact"]];
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 40);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  const links = [["About", "about"], ["Collection", "best"],["Services", "services"], ["Contact", "contact"]];
   return (
-    <header><div className="wrap">
-      
-<a href="#top" aria-label="Nani Photography Clickz" className="brandlogo">
- <img src="/logo-dark.png" alt="Nani Photography Clickz" />
-</a>
-
+    <header className={scrolled ? "solid" : ""}><div className="wrap">
+      <a href="#top" aria-label="Nani Photography Clickz" className="brandlogo">
+        <img src="/images/logo.png" alt="Nani Photography Clickz" />
+      </a>
       <nav aria-label="Main"><ul id="nav" className={open ? "open" : ""} onClick={(e) => e.target.tagName === "A" && setOpen(false)}>
         {links.map(([l, id]) => <li key={id}><a href={`#${id}`}>{l}</a></li>)}
       </ul></nav>
@@ -50,7 +54,7 @@ function Hero() {
         <h1>Every Moment Deserves to Be Remembered.</h1>
         <p>Unhurried, honest photography for newborns, families, weddings and celebrations.</p>
         <div className="row">
-          <a className="btn light" href="#about">Explore Portfolio</a>
+          <a className="btn light" href="#services">Explore services</a>
           <a className="btn line" href="#contact">Book a Photoshoot</a>
         </div>
       </div>
@@ -65,21 +69,65 @@ function Stories({ pick }) {
   );
 }
 
+
 function About() {
-  return (<>
-    <section id="about"><div className="wrap about">
-      <div className="ph">Add: images/family/photographer-portrait.jpg</div><img src="/images/hero.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-<div style={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(25,15,8,.35), rgba(25,15,8,.55))" }} />
-      <div className="t"><h2>Hello, I'm Nani.</h2>
-        <p className="lead">I'm a freelance photographer based in Hyderabad. I photograph people as they are, so the pictures feel like your memory of the day.</p>
-        <p>{/* TODO: replace with your real story and experience */}I take time to understand your family and your occasion, then stay quietly in the background while it unfolds. Available in Hyderabad, and for travel by arrangement.</p></div>
-    </div></section>
-    <section style={{ paddingTop: 0 }}><div className="wrap three">
-      <div><h3>Philosophy</h3><p>Real moments matter more than stiff poses. I look for the glance, the laugh and the small gesture you would otherwise forget.</p></div>
-      <div><h3>Approach</h3><p>We plan together, shoot calmly at your pace, and I deliver carefully edited photographs you can print and share.</p></div>
-      <div><h3>Location &amp; availability</h3><p>Based in Hyderabad, Telangana. Message me on WhatsApp to check dates for your shoot.</p></div>
-    </div></section>
-  </>);
+  return (
+    <>
+      <section id="about">
+        <div className="wrap about">
+          <img
+            src="/images/family/photographer-portrait.png"
+            alt="Nani Photography Clickz"
+            className="portrait"
+          />
+
+          <div className="t">
+            <h2>Hello, I'm Naveen.</h2>
+
+            <p className="lead">
+              I'm a freelance photographer based in Hyderabad. I photograph
+              people as they are, so the pictures feel like your memory of
+              the day.
+            </p>
+
+            <p>
+              I take time to understand your family and your occasion, then
+              stay quietly in the background while it unfolds. Available in
+              Hyderabad, and for travel by arrangement.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ paddingTop: 0 }}>
+        <div className="wrap three">
+          <div>
+            <h3>Philosophy</h3>
+            <p>
+              Real moments matter more than stiff poses. I look for the glance,
+              the laugh and the small gesture you would otherwise forget.
+            </p>
+          </div>
+
+          <div>
+            <h3>Approach</h3>
+            <p>
+              We plan together, shoot calmly at your pace, and I deliver
+              carefully edited photographs you can print and share.
+            </p>
+          </div>
+
+          <div>
+            <h3>Location &amp; availability</h3>
+            <p>
+              Based in Hyderabad, Telangana. Message me on WhatsApp to check
+              dates for your shoot.
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
 
 function Best({ pick }) {
@@ -87,8 +135,8 @@ function Best({ pick }) {
     <section id="best"><div className="wrap"><h2>Best Photographs</h2>
       <p style={{ maxWidth: "34em", marginTop: 14 }}>A few favourites. Tap one to open that collection.</p>
       <div className="best">
-        {["maternity", "kids", "baby", "newborn"].map((id, i) => { const s = S.find((x) => x[0] === id); return (
-          <a key={id} className={`b b${i}`} href="#portfolio" style={{ padding: 0 }} onClick={() => pick(id)}>
+        {["maternity", "kids", "birthday", "newborn"].map((id, i) => { const s = S.find((x) => x[0] === id); return (
+          <a key={id} className={`b b${i}`} href="#services" style={{ padding: 0 }} onClick={() => pick(id)}>
             <Box s={s} i={0} ar="1/1" style={{ position: "absolute", inset: 0, aspectRatio: "auto" }} />
             <em style={{ position: "relative", zIndex: 1, padding: 16, color: "#fff", textShadow: "0 1px 8px rgba(0,0,0,.5)" }}>{short(s[1])}</em>
           </a>); })}
@@ -97,7 +145,7 @@ function Best({ pick }) {
   );
 }
 
-function Portfolio({ cat, setCat }) {
+function Gallery({ cat, setCat }) {
   const [cur, setCur] = useState(null);
   const all = S.filter((s) => cat === "all" || s[0] === cat).flatMap(items);
   const shown = cat === "all" ? all.filter((p) => real(p.s, p.i)) : all;
@@ -109,7 +157,7 @@ function Portfolio({ cat, setCat }) {
   }, [cur, shown.length]);
   const p = cur !== null ? shown[cur] : null;
   return (
-    <section id="portfolio" className="alt"><div className="wrap"><h2>Portfolio</h2>
+    <section id="services" className="alt"><div className="wrap"><h2>Services</h2>
       <div className="filters" role="group" aria-label="Filter by category">
         {[["all", "All"], ...S.map((s) => [s[0], short(s[1])])].map(([id, n]) => <button key={id} aria-pressed={id === cat} onClick={() => { setCat(id); setCur(null); }}>{n}</button>)}
       </div>
@@ -140,14 +188,38 @@ function Services() {
   );
 }
 
+
 function Process() {
   return (
-    <section className="alt"><div className="wrap"><h2>How it works</h2><ol className="steps">
-      <li><b>Message me</b><br />Tell me the occasion, date and place on WhatsApp.</li><li><b>Plan together</b><br />We agree the package, timing and ideas.</li>
-      <li><b>Shoot day</b><br />Relaxed, unhurried and led by your moments.</li><li><b>Receive your photos</b><br />Edited photographs delivered to you.</li>
-    </ol></div></section>
+    <section className="alt">
+      <div className="wrap">
+        <h2>How it works</h2>
+        <ol className="steps">
+          <li>
+            <b>Message me</b><br />
+            Tell me the occasion, date and place on WhatsApp.
+          </li>
+
+          <li>
+            <b>Plan together</b><br />
+            We discuss your requirements, timing and creative ideas.
+          </li>
+
+          <li>
+            <b>Shoot day</b><br />
+            Relaxed, unhurried and led by your moments.
+          </li>
+
+          <li>
+            <b>Receive your photos</b><br />
+            Edited photographs delivered to you.
+          </li>
+        </ol>
+      </div>
+    </section>
   );
 }
+
 
 function Packages() {
   return (
@@ -177,8 +249,8 @@ function Contact() {
   return (
     <section id="contact" className="alt"><div className="wrap contact">
       <div><h2>Let's plan your shoot</h2><ul>
-        <li><a href={wa(GEN)}>WhatsApp +91 77319 42566</a></li><li><a href="tel:+917731942566">Call +91 77319 42566</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href={INSTAGRAM}>Instagram @nani_photography_clickz</a></li><li>Hyderabad, Telangana, India</li></ul></div>
+        <li><a href={wa(GEN)}>WhatsApp : +91 77319 42566</a></li><li><a href="tel:+917731942566">Call : +91 77319 42566</a></li>
+        <li><a target="_blank" rel="noopener noreferrer" href={INSTAGRAM}>Instagram : @nani_photography_clickz</a></li><li>Hyderabad, Telangana, India</li></ul></div>
       <form onSubmit={submit}>
         <label>Name<input required autoComplete="name" value={f.name} onChange={set("name")} /></label>
         <label>Phone<input required type="tel" autoComplete="tel" value={f.phone} onChange={set("phone")} /></label>
@@ -194,19 +266,42 @@ function Contact() {
 function Footer() {
   return (
     <footer><div className="wrap">
-      <div><div className="logo" style={{ fontSize: "1.6rem" }}>Nani Photography Clickz</div><div style={{ fontSize: ".9rem", color: "#D9C7A6" }}>Photographer in Hyderabad, Telangana</div></div>
-      <div style={{ display: "flex", gap: 20 }}><a target="_blank" rel="noopener noreferrer" href={INSTAGRAM}>Instagram</a><a href={wa(GEN)}>WhatsApp</a><a href="tel:+917731942566">Call</a></div>
-      <small>© {new Date().getFullYear()} Nani Photography Clickz</small>
+      <div><a href="#top" className="brandlogo">
+  <img
+    src="/images/logo.png"
+    alt="Nani Photography Clickz"
+    style={{ height: "75px", width: "auto" }}
+  />
+</a><div style={{ fontSize: ".9rem", color: "#D9C7A6" }}></div></div>
+      <div className="soc">
+  <a target="_blank" rel="noopener noreferrer" href={INSTAGRAM} aria-label="Instagram"><InstaIcon size={26} strokeWidth={1.5} /></a>
+  <a href={wa(GEN)} aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+      <g transform="translate(6.2 6.2) scale(.5)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></g>
+    </svg>
+  </a>
+  <a href="tel:+917731942566" aria-label="Call"><Phone size={26} strokeWidth={1.5} /></a>
+</div><small>© {new Date().getFullYear()} Nani Photography Clickz</small>
     </div></footer>
   );
 }
 
 export default function Site() {
   const [cat, setCat] = useState("all");
-  const pick = (id) => { setCat(id); location.hash = "portfolio"; };
+  const pick = (id) => { setCat(id); location.hash = "services"; };
   return (<>
     <Header />
-    <main><Hero /><Stories pick={pick} /><About /><Best pick={pick} /><Portfolio cat={cat} setCat={setCat} /><Services /><Process /><Packages /><Instagram /><Contact /></main>
+    <main>
+  <Hero />
+  <Stories pick={pick} />
+  <About />
+  <Best pick={pick} />
+  <Gallery cat={cat} setCat={setCat} />
+  <Process />
+  <Instagram />
+  <Contact />
+</main>
     <Footer />
     <a className="wafab" href={wa(GEN)} aria-label="Chat on WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
   <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />

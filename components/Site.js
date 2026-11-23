@@ -48,8 +48,11 @@ function Hero() {
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(25,15,8,.35), rgba(25,15,8,.55))" }} />
       <div className="wrap">
         <h1>Every Moment Deserves to Be Remembered.</h1>
-        <p>Unhurried, honest photography for newborns, families, weddings and celebrations in Hyderabad.</p>
-        <div className="row"><a className="btn light" href="#portfolio">Explore Portfolio</a><a className="btn line" href={wa(GEN)}>Book a Photoshoot</a></div>
+        <p>Unhurried, honest photography for newborns, families, weddings and celebrations.</p>
+        <div className="row">
+          <a className="btn light" href="#about">Explore Portfolio</a>
+          <a className="btn line" href="#contact">Book a Photoshoot</a>
+        </div>
       </div>
     </section>
   );
